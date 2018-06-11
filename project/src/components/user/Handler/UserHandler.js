@@ -5,28 +5,17 @@ import LogForm from "../LogForm/LogForm";
 import Footer from "../../common/Footer";
 import "./UserHandler.css";
 import UserInfo from "../UserInfo/UserInfo";
+import UserProfile from "../../../closure/UserProfile";
 
 class UserHandler extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            logged:true
-        }
-        this.setLogged = this.setLogged.bind(this);
-    }
-
-    setLogged(){
-        this.setState({logged:!this.state.logged});
-    }
-
     render(){
-        if(!this.state.logged){
+        if(UserProfile.getName() === ""){
             return(
                 <div>
-                    <NavigationBar logged={this.state.logged}/>
+                    <NavigationBar/>
                     <div className="inline-block col-sm-5">
                         <br/>
-                        <LogForm setLogged={this.setLogged.bind(this)}/>
+                        <LogForm/>
                     </div>
                     <div className="inline-block col-sm-7">
                         <br/>
@@ -40,7 +29,7 @@ class UserHandler extends Component{
             return(
                 <div>
                     <div>
-                        <NavigationBar logged={this.state.logged} setLogged={this.setLogged}/>
+                        <NavigationBar/>
                         <div className="inline-block col-sm-5">
                             <br/>
                             <UserInfo/>

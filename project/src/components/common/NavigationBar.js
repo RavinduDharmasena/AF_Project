@@ -1,11 +1,18 @@
 import React,{ Component } from 'react'
 import { Link } from 'react-router';
+import UserProfile from '../../closure/UserProfile';
 
 class NavigationBar extends Component{
+
+    unsetName(){
+        UserProfile.setName("");
+        console.log("Log out called");
+    }
+
     render(){
         var logOutButton
-        if(this.props.logged){
-            logOutButton = <input type="button" className="btn btn-danger" value="Log Out" onClick={this.props.setLogged}/>
+        if(/*this.props.logged*/UserProfile.getName() !== ""){
+            logOutButton = <input type="button" className="btn btn-danger" value="Log Out" onClick={this.unsetName.bind(this)}/>
         }
 
         return(
@@ -13,20 +20,20 @@ class NavigationBar extends Component{
                 <div>
                     <p>Header</p>
                 </div>
-                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                    <a class="navbar-brand" href="#">Logo</a>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <li><Link to="/" className="nav-link">Overview</Link></li>
+                <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+                    <a className="navbar-brand" href="#">Logo</a>
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">Overview</Link>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link to="/registration" className="nav-link">Patient Registration</Link>
                         </li>
                         <li className="nav-item">
-                            <li><Link to="/diagnosis" className="nav-link">Diagnosis</Link></li>
+                            <Link to="/diagnosis" className="nav-link">Diagnosis</Link>
                         </li>
                         <li className="nav-item">
-                            <li><Link to="/payment" className="nav-link">Payment</Link></li>
+                            <Link to="/payment" className="nav-link">Payment</Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto">

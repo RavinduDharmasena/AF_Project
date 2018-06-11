@@ -1,6 +1,13 @@
 import React,{ Component } from 'react'
+import UserProfile from '../../../closure/UserProfile';
 
 class User extends Component{
+
+    setName(){
+        UserProfile.setName("Name");
+        console.log("Function called");
+    }
+
     render(){
         return(
             <div>
@@ -15,7 +22,7 @@ class User extends Component{
                             <label>Password : </label>
                             <input type="password" placeholder="password" className="form-control"/>
                         </div>
-                        <input type="button" className="btn btn-success" value="Log In" onClick={this.props.setLogged}/>
+                        <input type="button" className="btn btn-success" value="Log In" onClick={this.setName.bind(this)}/>
                     </div>
                 </div>
             </div>
