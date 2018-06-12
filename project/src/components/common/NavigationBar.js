@@ -15,7 +15,7 @@ class NavigationBar extends Component{
                         </div>
                         <ul class="nav navbar-nav">
                             <li class="active"><Link to="/">Overview</Link></li>
-                            <li><Link to="/registration">Patient Registration</Link></li>
+                            <li><Link to="/quickRegistration">Patient Registration</Link></li>
                             <li><Link to="/diagnosis">Diagnosis</Link></li>
                             <li><Link to="/payment">Payment</Link></li>
                         </ul>
