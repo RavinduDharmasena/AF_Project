@@ -6,6 +6,7 @@ class User extends Component{
     setName(){
         UserProfile.setName("Name");
         console.log("Function called");
+        this.props.setLogged(true);
     }
 
     render(){

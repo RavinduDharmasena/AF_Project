@@ -3,15 +3,36 @@ import { Link } from 'react-router';
 import UserProfile from '../../closure/UserProfile';
 
 class NavigationBar extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            logged:false
+        }
+    }
+
+    componentWillMount(){
+        if(UserProfile.getName() !== ""){
+            this.setState({loggged:true});
+        }
+        else{
+            this.setState({logged:false});
+        }
+        console.log(UserProfile.getName());
+    }
 
     unsetName(){
         UserProfile.setName("");
         console.log("Log out called");
+        this.props.setLogged(false);
+    }
+
+    setRun(){
+        this.props.setRun("payment");
     }
 
     render(){
         var logOutButton
-        if(/*this.props.logged*/UserProfile.getName() !== ""){
+        if(UserProfile.getName() !== ""){
             logOutButton = <input type="button" className="btn btn-danger" value="Log Out" onClick={this.unsetName.bind(this)}/>
         }
 
