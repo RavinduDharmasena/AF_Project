@@ -4,7 +4,13 @@
     <list default="true" id="9309bec6-5d95-45f3-9a0a-f60dd9dff636" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../project/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../project/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/../project/src/components/common/NavigationBar.js" afterPath="$PROJECT_DIR$/../project/src/components/common/NavigationBar.js" />
-      <change beforePath="$PROJECT_DIR$/../project/src/components/user/Handler/UserHandler.js" afterPath="$PROJECT_DIR$/../project/src/components/user/Handler/UserHandler.js" />
+      <change beforePath="$PROJECT_DIR$/../project/src/components/diagnosis/Diagosis.js" afterPath="$PROJECT_DIR$/../project/src/components/diagnosis/Diagosis.js" />
+      <change beforePath="$PROJECT_DIR$/../project/src/components/payment/Payment.js" afterPath="$PROJECT_DIR$/../project/src/components/payment/Payment.js" />
+      <change beforePath="$PROJECT_DIR$/../project/src/components/registration/Registration.js" afterPath="$PROJECT_DIR$/../project/src/components/registration/Registration.js" />
+      <change beforePath="$PROJECT_DIR$/../project/src/components/user/Handler/UserHandler.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../project/src/components/user/Handler/UserHandler.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../project/src/components/user/Handler/UserHandler_Backup.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/../project/src/index.js" afterPath="$PROJECT_DIR$/../project/src/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />

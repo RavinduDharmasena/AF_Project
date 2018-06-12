@@ -6,7 +6,6 @@ class Payment extends Component{
     render(){
         return(
             <div>
-                <NavigationBar/>
                 <h1>Payment Component</h1>
                 <Footer/>
             </div>
