@@ -21,34 +21,29 @@ class User extends Component{
         if(this.state.username === ""){
             if(this.state.password === ""){
                 this.props.setError("Username And Password Are Empty");
-//                console.log(this.state.error);
-//                return;
             }
             else{
                 this.props.setError("Username Is Empty");
-//                console.log(this.state.error);
-//                return;
             }
         }
         else{
             if(this.state.password === ""){
                 this.props.setError("Password Is Empty");
-//                console.log(this.state.error);
-//                return;
             }
         }
 
-        if((this.state.username !== "") & (this.state.password !== ""))
+        if((this.state.username !== "") & (this.state.password !== "")){}
         Axios.get('http://localhost:8000/user/' + this.state.username + '/' + this.state.password).then(function (data) {
             console.log(data.data);
             return data.data;
         }).then(function (object) {
             let UserData = object;
             console.log(UserData);
-            UserProfile.setName(this.state.username);
-//            console.log("Function called");
-//            console.log(this.state.username);
-            this.props.setLogged(true);
+
+            if(UserData.length > 0){
+                UserProfile.setName(this.state.username);
+                this.props.setLogged(true);
+            }
         }.bind(this));
     }
 
@@ -64,13 +59,13 @@ class User extends Component{
 
     render(){
         console.log(this.state.error);
-        /*let ErrorBox;
+        let ErrorBox;
         if(this.state.error !== ""){
             ErrorBox = (<div className="alert alert-danger alert-dismissible">
                 <button type="button" className="close" data-dismiss="alert">&times;</button>
                 <strong>Error!</strong> {this.state.error}
             </div>);
-        }*/
+        }
         return(
             <div>
                 <div className="card">

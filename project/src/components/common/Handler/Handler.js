@@ -49,14 +49,15 @@ class UserHandler extends Component{
     render(){
         console.log("Error : " + this.state.error);
         if(!this.state.logged){
-//            let ErrorBox;
-//            if(this.state.error !== ""){
-/*                ErrorBox = (<div className="alert alert-danger alert-dismissible">
-                    <button type="button" className="close" data-dismiss="alert">&times;</button>
+            let ErrorBox;
+            if(this.state.error !== ""){
+                ErrorBox = (<div className="alert alert-danger">
                     <strong>Error!</strong> {this.state.error}
                 </div>);
-//                this.setError("");*/
-//            }
+            }
+            else{
+                ErrorBox = "";
+            }
 
             return(
                 <div>
@@ -69,6 +70,10 @@ class UserHandler extends Component{
                         <br/>
                         <Overview/>
                     </div>
+                    <div className="col-sm-5">
+                        <br/>
+                        {ErrorBox}
+                    </div>
                     <Footer/>
                 </div>
             )
@@ -78,7 +83,7 @@ class UserHandler extends Component{
                 return(
                     <div>
                         <div>
-                            <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                            <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                             <div className="inline-block col-sm-5">
                                 <br/>
                                 <UserInfo/>
