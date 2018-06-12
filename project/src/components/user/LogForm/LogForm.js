@@ -13,7 +13,7 @@ class User extends Component{
         return(
             <div>
                 <div className="card">
-                    <div className="card-header bg-default text-black">Login Form</div>
+                    <div className="card-header bg-default text-black">Login</div>
                     <div className="card-body">
                         <div className="form-group">
                             <label>Username : </label>
