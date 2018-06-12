@@ -16,10 +16,16 @@ class UserHandler extends Component{
         super(props);
         this.state = {
             logged:false,
-            run:"user"
+            run:"user",
+            error:""
         }
         this.setLogged = this.setLogged.bind(this);
         this.setRun = this.setRun.bind(this);
+        this.setError = this.setError.bind(this);
+    }
+
+    setError(value){
+        this.setState({error:value});
     }
 
     setLogged(value){
@@ -41,13 +47,23 @@ class UserHandler extends Component{
     }
 
     render(){
-        if(!this.state.logged){//(UserProfile.getName() === ""){
+        console.log("Error : " + this.state.error);
+        if(!this.state.logged){
+//            let ErrorBox;
+//            if(this.state.error !== ""){
+/*                ErrorBox = (<div className="alert alert-danger alert-dismissible">
+                    <button type="button" className="close" data-dismiss="alert">&times;</button>
+                    <strong>Error!</strong> {this.state.error}
+                </div>);
+//                this.setError("");*/
+//            }
+
             return(
                 <div>
                     <NavigationBar setRun={this.setRun}/>
                     <div className="inline-block col-sm-5">
                         <br/>
-                        <LogForm setLogged={this.setLogged}/>
+                        <LogForm setLogged={this.setLogged} setError={this.setError}/>
                     </div>
                     <div className="inline-block col-sm-7">
                         <br/>
