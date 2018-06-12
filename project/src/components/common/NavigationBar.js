@@ -24,10 +24,20 @@ class NavigationBar extends Component{
         UserProfile.setName("");
         console.log("Log out called");
         this.props.setLogged(false);
+        this.setRun("user");
     }
 
-    setRun(){
-        this.props.setRun("payment");
+    setRun(value){
+        if(UserProfile.getName() !== ""){
+            this.props.setRun(value);
+        }
+        else{
+            this.props.setRun("user");
+        }
+    }
+
+    setPayment(){
+        this.setRun("payment");
     }
 
     render(){
@@ -54,7 +64,7 @@ class NavigationBar extends Component{
                             <Link to="/diagnosis" className="nav-link">Diagnosis</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/payment" className="nav-link">Payment</Link>
+                            <Link onClick={this.setPayment.bind(this)} className="nav-link">Payment</Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto">
