@@ -25,6 +25,7 @@ class UserHandler extends Component{
 
     setRun(value){
         this.setState({run:value});
+        console.log(this.state.run);
     }
 
     componentWillMount(){
@@ -74,7 +75,7 @@ class UserHandler extends Component{
             }
             else if(this.state.run === "payment"){
                 <div>
-                    <NavigationBar/>
+                    <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
                     <Payment/>
                     <Footer/>
                 </div>

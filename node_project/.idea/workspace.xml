@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9309bec6-5d95-45f3-9a0a-f60dd9dff636" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/../project/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../project/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/../project/package-lock.json" afterPath="$PROJECT_DIR$/../project/package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/../project/package.json" afterPath="$PROJECT_DIR$/../project/package.json" />
-      <change beforePath="$PROJECT_DIR$/../project/src/closure/UserProfile.js" afterPath="$PROJECT_DIR$/../project/src/closure/UserProfile.js" />
       <change beforePath="$PROJECT_DIR$/../project/src/components/common/NavigationBar.js" afterPath="$PROJECT_DIR$/../project/src/components/common/NavigationBar.js" />
-      <change beforePath="$PROJECT_DIR$/../project/src/components/payment/Payment.js" afterPath="$PROJECT_DIR$/../project/src/components/payment/Payment.js" />
       <change beforePath="$PROJECT_DIR$/../project/src/components/user/Handler/UserHandler.js" afterPath="$PROJECT_DIR$/../project/src/components/user/Handler/UserHandler.js" />
-      <change beforePath="$PROJECT_DIR$/../project/src/components/user/LogForm/LogForm.js" afterPath="$PROJECT_DIR$/../project/src/components/user/LogForm/LogForm.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -163,6 +157,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
