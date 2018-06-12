@@ -6,7 +6,6 @@ class Diagosis extends Component{
     render(){
         return(
             <div>
-                <NavigationBar/>
                 <h1>Diagnosis Component</h1>
                 <Footer/>
             </div>

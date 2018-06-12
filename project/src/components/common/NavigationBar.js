@@ -40,6 +40,18 @@ class NavigationBar extends Component{
         this.setRun("payment");
     }
 
+    setUser(){
+        this.setRun("user");
+    }
+
+    setDiagnosis(){
+        this.setRun("diagnosis");
+    }
+
+    setRegister(){
+        this.setRun("register");
+    }
+
     render(){
         var logOutButton
         if(UserProfile.getName() !== ""){
@@ -55,13 +67,13 @@ class NavigationBar extends Component{
                     <a className="navbar-brand" href="#">Logo</a>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link to="/" className="nav-link">Overview</Link>
+                            <Link onClick={this.setUser.bind(this)} className="nav-link">Overview</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/registration" className="nav-link">Patient Registration</Link>
+                            <Link onClick={this.setRegister.bind(this)} className="nav-link">Patient Registration</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/diagnosis" className="nav-link">Diagnosis</Link>
+                            <Link onClick={this.setDiagnosis.bind(this)} className="nav-link">Diagnosis</Link>
                         </li>
                         <li className="nav-item">
                             <Link onClick={this.setPayment.bind(this)} className="nav-link">Payment</Link>

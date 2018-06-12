@@ -1,12 +1,15 @@
 import React,{ Component } from 'react';
-import Overview from "../Overview/Overview";
-import NavigationBar from "../../common/NavigationBar";
-import LogForm from "../LogForm/LogForm";
-import Footer from "../../common/Footer";
-import "./UserHandler.css";
-import UserInfo from "../UserInfo/UserInfo";
+import Overview from "../../user/Overview/Overview";
+import NavigationBar from "../NavigationBar";
+import LogForm from "../../user/LogForm/LogForm";
+import Footer from "../Footer";
+import UserInfo from "../../../components/user/UserInfo/UserInfo";
 import UserProfile from "../../../closure/UserProfile";
 import Payment from "../../payment/Payment";
+import Diagosis from "../../diagnosis/Diagosis";
+import Registration from "../../registration/Registration";
+
+import "./UserHandler.css";
 
 class UserHandler extends Component{
     constructor(props){
@@ -74,11 +77,31 @@ class UserHandler extends Component{
                 );
             }
             else if(this.state.run === "payment"){
-                <div>
-                    <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
-                    <Payment/>
-                    <Footer/>
-                </div>
+                return(
+                    <div>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <Payment/>
+                        <Footer/>
+                    </div>
+                );
+            }
+            else if(this.state.run === "diagnosis"){
+                return(
+                    <div>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <Diagosis/>
+                        <Footer/>
+                    </div>
+                );
+            }
+            else if(this.state.run === "register"){
+                return(
+                    <div>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <Registration/>
+                        <Footer/>
+                    </div>
+                );
             }
         }
     }

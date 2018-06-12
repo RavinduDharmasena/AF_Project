@@ -6,7 +6,6 @@ class Registration extends Component{
     render(){
         return(
             <div>
-                <NavigationBar/>
                 <h1>Registration Component</h1>
                 <Footer/>
             </div>
