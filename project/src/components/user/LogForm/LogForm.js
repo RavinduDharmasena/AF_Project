@@ -44,6 +44,9 @@ class User extends Component{
                 UserProfile.setName(this.state.username);
                 this.props.setLogged(true);
             }
+            else{
+                this.props.setError("Username and/or password is/are invalid");
+            }
         }.bind(this));
     }
 
