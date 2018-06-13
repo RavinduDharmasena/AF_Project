@@ -1,13 +1,12 @@
 import React,{ Component } from 'react'
 
-class PatientDetails extends Component{
+class PatientBill extends Component{
 
     render(){
         return(
             <input type="text"/>
         );
     }
-
 }
 
-export default PatientDetails;
+export default PatientBill;
