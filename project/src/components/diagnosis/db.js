@@ -15,19 +15,21 @@ const drugs = new Schema({
 });
 
 const diagSchema = new Schema({
-    patientid:String,
+    patientid:patientid,
+    //patientid:{type: mongoose.Schema.Types.ObjectId, ref: 'patient'},
     complaints:String,
     allergies:String,
     phyexams:String,
-    treatments:[injectSchema][drugs],
+    treatments:String
+    treatments:[{injections :{ type: mongoose.Schema.Types.ObjectId, ref: 'injections',qty:Number, Total:Number},presdrugs:{ type: mongoose.Schema.Types.ObjectId, ref: 'drugs' ,qty:Number, Total:Number}}]
 
 });
 
 
 
-mongoose.model('diagnosis', diagSchema);
-mongoose.model('drugs', injectSchema);
 mongoose.model('injections', drugs);
+mongoose.model('drugs', injectSchema);
+mongoose.model('diagnosis', diagSchema);
 
 mongoose.connect('mongodb://localhost:27017/pcudb' , (err)=>{
     if(err){
