@@ -2,17 +2,6 @@ import React,{ Component } from 'react'
 
 class PatientBill extends Component{
 
-    /*constructor(props){
-        super(props);
-
-        this.state = {
-            patientbill : this.props.patientbill
-        }
-    }*/
-
-    componentWillMount(){
-       // this.setState({patientbill:this.props.patientbill});
-    }
 
     setShowPayment(){
         this.props.setShowPayment();

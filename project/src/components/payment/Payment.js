@@ -30,6 +30,7 @@ class Payment extends Component{
 
     search(e){
             console.log("***********************************"+this.state.search_p_id);
+            this.state.showpayment=false;
             if(this.state.search_p_id!==null || this.state.search_p_id=="") {
                 Axios.get("http://localhost:8000/registration/getpatient/" + this.state.search_p_id).then(function (data) {
                     console.log(data.data);
@@ -131,7 +132,6 @@ class Payment extends Component{
                 </div>
 
                 {viewpayment}
-
                 <br/>
                 <br/>
                 <br/>
