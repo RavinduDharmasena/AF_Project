@@ -2,7 +2,11 @@ const Mongoose = require('mongoose');
 const Schema = Mongoose.Schema;
 
 var UserSchema = new Schema({
-    userID:{
+    _id:{
+        type:String,
+        required:true
+    },
+    name:{
         type:String,
         required:true
     },
@@ -13,11 +17,26 @@ var UserSchema = new Schema({
     password:{
         type:String,
         required:true
-    }
+    }/*,
+    lastLogin:{
+        type:Date,
+        required:false
+    }*/
 });
 
-Mongoose.model('User',UserSchema);
+var LoginSchema = {
+    _id:{
+        type:String,
+        required:true
+    },
+    lastLogin:{
+        type:Date,
+        required:false
+    }
+}
 
+Mongoose.model('User',UserSchema);
+Mongoose.model('Login',LoginSchema);
 Mongoose.connect('mongodb://localhost:27017/pcudb',function (err) {
     if(err){
         console.log(err);
