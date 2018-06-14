@@ -33,7 +33,7 @@ class PatientBill extends Component{
                         </tr>
                         {pbill.drugbill.map((drug, i) => {
                             return (
-                                <tr>
+                                <tr key={i}>
                                     <td>{drug.name}</td>
                                     <td>{drug.qty}</td>
                                     <td align="right">{drug.subprice}</td>
@@ -64,7 +64,7 @@ class PatientBill extends Component{
                         </tr>
                         {pbill.injectionbill.map((inj, i) => {
                             return (
-                                <tr>
+                                <tr key={i}>
                                     <td>{inj.name}</td>
                                     <td>{inj.qty}</td>
                                     <td align="right">{inj.subprice}</td>

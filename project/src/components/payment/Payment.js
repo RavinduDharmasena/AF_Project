@@ -27,7 +27,7 @@ class Payment extends Component{
             console.log("***********************************"+this.state.search_p_id);
             Axios.get("http://localhost:8000/registration/getpatient/"+this.state.search_p_id).then(function (data) {
                 console.log(data.data);
-                if(data.data===null){
+                if(data.data===null || data.data===""){
                     this.setState({patientdata : null});
                     alert("Patient Already Discharged or Not Found");
                     this.state.searchbox.value="";
