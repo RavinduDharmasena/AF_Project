@@ -108,9 +108,53 @@ const PatientSchema = new Schema({
 
 });
 
+const PaymentSchema = new Schema({
+    _id : {
+        type: String,
+        require : true
+    },
+
+    billamount : {
+        type : Number,
+        require : true
+    },
+
+    type : {
+        type: String,
+        require : true
+    },
+
+    cardtype : {
+        type : String,
+        require : false
+    },
+
+    cardno : {
+        type : Number,
+        require : false
+    },
+
+    cvc : {
+        type : Number,
+        require : false
+    },
+
+    expdate : {
+        type : Date,
+        require : false
+    },
+
+    billdate : {
+        type : Date,
+        require : true
+    }
+
+});
+
 Mongoose.model('Registration',PatientSchema);
 Mongoose.model('User',UserSchema);
 Mongoose.model('Login',LoginSchema);
+Mongoose.model('Payment',PaymentSchema);
 Mongoose.connect('mongodb://localhost:27017/pcudb',function (err) {
     if(err){
         console.log(err);
