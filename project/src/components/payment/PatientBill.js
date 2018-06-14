@@ -14,6 +14,9 @@ class PatientBill extends Component{
        // this.setState({patientbill:this.props.patientbill});
     }
 
+    setShowPayment(){
+        this.props.setShowPayment();
+    }
 
     render(){
         let pbill = this.props.patientbill;
@@ -120,7 +123,7 @@ class PatientBill extends Component{
                     </tr>
                     </tbody>
                 </table>
-                <button className="btn btn-success w-100">Pay Bill</button>
+                <button className="btn btn-success w-100" onClick={this.setShowPayment.bind(this)}>Pay Bill</button>
             </div>
         );
     }
