@@ -17,11 +17,17 @@ class UserHandler extends Component{
         this.state = {
             logged:false,
             run:"user",
-            error:""
+            error:"",
+            userDetails:{}
         }
         this.setLogged = this.setLogged.bind(this);
         this.setRun = this.setRun.bind(this);
         this.setError = this.setError.bind(this);
+        this.setUserDetails = this.setUserDetails.bind(this);
+    }
+
+    setUserDetails(object){
+        this.setState({userDetails:object});
     }
 
     setError(value){
@@ -52,7 +58,7 @@ class UserHandler extends Component{
             let ErrorBox;
             if(this.state.error !== ""){
                 ErrorBox = (<div className="alert alert-danger">
-                    <strong>Error!</strong> {this.state.error}
+                    {this.state.error}
                 </div>);
             }
             else{
@@ -64,7 +70,7 @@ class UserHandler extends Component{
                     <NavigationBar setRun={this.setRun}/>
                     <div className="inline-block col-sm-5">
                         <br/>
-                        <LogForm setLogged={this.setLogged} setError={this.setError}/>
+                        <LogForm setLogged={this.setLogged} setError={this.setError} setUserDetails={this.setUserDetails}/>
                     </div>
                     <div className="inline-block col-sm-7">
                         <br/>
@@ -86,7 +92,7 @@ class UserHandler extends Component{
                             <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                             <div className="inline-block col-sm-5">
                                 <br/>
-                                <UserInfo/>
+                                <UserInfo userDetails={this.state.userDetails}/>
                             </div>
                             <div className="inline-block col-sm-7">
                                 <br/>
@@ -100,7 +106,7 @@ class UserHandler extends Component{
             else if(this.state.run === "payment"){
                 return(
                     <div>
-                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                         <Payment/>
                         <Footer/>
                     </div>
@@ -109,7 +115,7 @@ class UserHandler extends Component{
             else if(this.state.run === "diagnosis"){
                 return(
                     <div>
-                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                         <Diagosis/>
                         <Footer/>
                     </div>
@@ -118,7 +124,7 @@ class UserHandler extends Component{
             else if(this.state.run === "register"){
                 return(
                     <div>
-                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                         <Registration/>
                         <Footer/>
                     </div>
