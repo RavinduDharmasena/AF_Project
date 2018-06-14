@@ -7,38 +7,72 @@ class User extends Component{
         super(props);
         this.state = {
             username:"",
-            password:""
+            password:"",
+            error:""
+//            userData:{}
         }
+        this.setError = this.setError.bind(this);
+    }
+
+    setError(value){
+        this.setState({error:value});
     }
 
     setName(){
         if(this.state.username === ""){
             if(this.state.password === ""){
-                alert("Username And Password Are Empty");
-                return;
+                this.props.setError("Username And Password Are Empty");
             }
             else{
-                alert("Username Is Empty");
-                return;
+                this.props.setError("Username Is Empty");
             }
         }
         else{
             if(this.state.password === ""){
-                alert("Password Is Empty");
-                return;
+                this.props.setError("Password Is Empty");
             }
         }
 
+        if((this.state.username !== "") & (this.state.password !== "")){}
         Axios.get('http://localhost:8000/user/' + this.state.username + '/' + this.state.password).then(function (data) {
             console.log(data.data);
             return data.data;
         }).then(function (object) {
             let UserData = object;
             console.log(UserData);
-            UserProfile.setName(this.state.username);
-//            console.log("Function called");
-//            console.log(this.state.username);
-            this.props.setLogged(true);
+
+            if(UserData.length > 0){
+                this.props.setUserDetails(UserData);
+                UserProfile.setUsername(this.state.username);
+                UserProfile.setName(UserData[0].name);
+
+     //           this.setState({userData:UserData});
+
+     //           console.log(this.state.userData);
+
+                /*const updatedUser = {
+                    _id:UserData[0]._id,
+                    username:UserData[0].username,
+                    password:UserData[0].password,
+                    name:UserData[0].name
+                }
+
+                Axios.put('http://localhost:8000/user/' + UserData[0]._id,updatedUser).then(function () {
+                    console.log("Login date is updated");
+                })*/
+
+                /*
+                *     "_id" : "U2",
+    "username" : "suranga123",
+    "password" : "suranga123",
+    "name" : "Suranga Lakmal",
+    "lastLogin" : ISODate("2018-06-13T06:58:18.740Z"),*/
+                UserProfile.setDate(UserData[0].lastLogin);
+                this.props.setLogged(true);
+            }
+            else{
+                this.props.setError("Username and/or password is/are invalid");
+            }
         }.bind(this));
     }
 
@@ -53,6 +87,14 @@ class User extends Component{
     }
 
     render(){
+        console.log(this.state.error);
+        let ErrorBox;
+        if(this.state.error !== ""){
+            ErrorBox = (<div className="alert alert-danger alert-dismissible">
+                <button type="button" className="close" data-dismiss="alert">&times;</button>
+                <strong>Error!</strong> {this.state.error}
+            </div>);
+        }
         return(
             <div>
                 <div className="card">

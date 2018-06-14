@@ -18,4 +18,12 @@ Router.get('/:username/:password',function (req,res) {
     })
 });
 
+Router.put('/:id',function (req,res) {
+   Controller.updateUser(req.params.id,req.body).then(function (response) {
+       res.status(response.status).send(response.message);
+   }).catch(function (reason) {
+       res.status(reason.status).send(reason.message);
+   })
+});
+
 module.exports = Router;
