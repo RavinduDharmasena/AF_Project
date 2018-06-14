@@ -9,6 +9,7 @@ class User extends Component{
             username:"",
             password:"",
             error:""
+//            userData:{}
         }
         this.setError = this.setError.bind(this);
     }
@@ -41,7 +42,32 @@ class User extends Component{
             console.log(UserData);
 
             if(UserData.length > 0){
-                UserProfile.setName(this.state.username);
+                this.props.setUserDetails(UserData);
+                UserProfile.setUsername(this.state.username);
+                UserProfile.setName(UserData[0].name);
+
+     //           this.setState({userData:UserData});
+
+     //           console.log(this.state.userData);
+
+                /*const updatedUser = {
+                    _id:UserData[0]._id,
+                    username:UserData[0].username,
+                    password:UserData[0].password,
+                    name:UserData[0].name
+                }
+
+                Axios.put('http://localhost:8000/user/' + UserData[0]._id,updatedUser).then(function () {
+                    console.log("Login date is updated");
+                })*/
+
+                /*
+                *     "_id" : "U2",
+    "username" : "suranga123",
+    "password" : "suranga123",
+    "name" : "Suranga Lakmal",
+    "lastLogin" : ISODate("2018-06-13T06:58:18.740Z"),*/
+                UserProfile.setDate(UserData[0].lastLogin);
                 this.props.setLogged(true);
             }
             else{
