@@ -28,6 +28,7 @@ class NavigationBar extends Component{
     }
 
     setRun(value){
+        this.props.setError("");
         if(UserProfile.getName() !== ""){
             this.props.setRun(value);
         }

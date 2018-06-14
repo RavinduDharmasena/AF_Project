@@ -17,11 +17,17 @@ class UserHandler extends Component{
         this.state = {
             logged:false,
             run:"user",
-            error:""
+            error:"",
+            userDetails:{}
         }
         this.setLogged = this.setLogged.bind(this);
         this.setRun = this.setRun.bind(this);
         this.setError = this.setError.bind(this);
+        this.setUserDetails = this.setUserDetails.bind(this);
+    }
+
+    setUserDetails(object){
+        this.setState({userDetails:object});
     }
 
     setError(value){
@@ -49,25 +55,30 @@ class UserHandler extends Component{
     render(){
         console.log("Error : " + this.state.error);
         if(!this.state.logged){
-//            let ErrorBox;
-//            if(this.state.error !== ""){
-/*                ErrorBox = (<div className="alert alert-danger alert-dismissible">
-                    <button type="button" className="close" data-dismiss="alert">&times;</button>
-                    <strong>Error!</strong> {this.state.error}
+            let ErrorBox;
+            if(this.state.error !== ""){
+                ErrorBox = (<div className="alert alert-danger">
+                    {this.state.error}
                 </div>);
-//                this.setError("");*/
-//            }
+            }
+            else{
+                ErrorBox = "";
+            }
 
             return(
                 <div>
                     <NavigationBar setRun={this.setRun}/>
                     <div className="inline-block col-sm-5">
                         <br/>
-                        <LogForm setLogged={this.setLogged} setError={this.setError}/>
+                        <LogForm setLogged={this.setLogged} setError={this.setError} setUserDetails={this.setUserDetails}/>
                     </div>
                     <div className="inline-block col-sm-7">
                         <br/>
                         <Overview/>
+                    </div>
+                    <div className="col-sm-5">
+                        <br/>
+                        {ErrorBox}
                     </div>
                     <Footer/>
                 </div>
@@ -78,10 +89,10 @@ class UserHandler extends Component{
                 return(
                     <div>
                         <div>
-                            <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                            <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                             <div className="inline-block col-sm-5">
                                 <br/>
-                                <UserInfo/>
+                                <UserInfo userDetails={this.state.userDetails}/>
                             </div>
                             <div className="inline-block col-sm-7">
                                 <br/>
@@ -95,7 +106,7 @@ class UserHandler extends Component{
             else if(this.state.run === "payment"){
                 return(
                     <div>
-                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                         <Payment/>
                         <Footer/>
                     </div>
@@ -104,7 +115,7 @@ class UserHandler extends Component{
             else if(this.state.run === "diagnosis"){
                 return(
                     <div>
-                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                         <Diagosis/>
                         <Footer/>
                     </div>
@@ -113,7 +124,7 @@ class UserHandler extends Component{
             else if(this.state.run === "register"){
                 return(
                     <div>
-                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun}/>
+                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
                         <Registration/>
                         <Footer/>
                     </div>
