@@ -11,21 +11,30 @@ class Payment extends Component{
         this.state = {
             search_p_id : 0,
             patientdata : null,
-            billdata: null
+            billdata: null,
+            searchbox : null
         }
     }
 
 
     setSearchPID(e){
             this.setState({search_p_id: e.target.value});
+            this.setState({searchbox: e.target});
+            console.log("****this is inside setsearchpid"+this.state.search_p_id)
     }
 
     search(e){
-            console.log(e.target.id);
             console.log("***********************************"+this.state.search_p_id);
             Axios.get("http://localhost:8000/registration/getpatient/"+this.state.search_p_id).then(function (data) {
                 console.log(data.data);
-                this.setState({patientdata : data.data});
+                if(data.data===null){
+                    this.setState({patientdata : null});
+                    alert("Patient Already Discharged or Not Found");
+                    this.state.searchbox.value="";
+                }else{
+                    this.setState({patientdata : data.data});
+                }
+
             }.bind(this)).then(Axios.get("http://localhost:9001/calcbill/"+this.state.search_p_id).then(function (data) {
                 console.log(data.data);
                 this.setState({billdata : data.data});
@@ -39,8 +48,8 @@ class Payment extends Component{
         let pbill;
         let alertmsg;
         if(this.state.patientdata !== null){
-            console.log("this is inside if detail"+this.state.patientdata);
-            console.log("this is inside if bill"+this.state.billdata);
+            console.log(this.state.patientdata);
+            console.log(this.state.billdata);
             pdetails = (
                 <PatientDetails patientdata={this.state.patientdata}/>
             );

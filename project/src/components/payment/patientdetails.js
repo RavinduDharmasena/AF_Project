@@ -2,21 +2,21 @@ import React,{ Component } from 'react'
 
 class PatientDetails extends Component{
 
-    constructor(props){
+    /*constructor(props){
         super(props);
 
         this.state = {
             patientdata : this.props.patientdata
         }
     }
+    */
 
     componentDidMount(){
         console.log("this is state from prop details"+this.props.patientdata);
     }
 
-
     render(){
-        let pdetails = this.state.patientdata;
+        let pdetails = this.props.patientdata;
         return(
 
             <table className="table table-bordered table-hover">
