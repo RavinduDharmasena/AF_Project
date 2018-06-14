@@ -2,26 +2,28 @@ import React,{ Component } from 'react'
 
 class PatientBill extends Component{
 
-    constructor(props){
+    /*constructor(props){
         super(props);
 
         this.state = {
             patientbill : this.props.patientbill
         }
+    }*/
+
+    componentWillMount(){
+       // this.setState({patientbill:this.props.patientbill});
     }
 
-    componentDidMount(){
-        console.log("this is state from prop bill"+this.props.patientbill);
-    }
 
     render(){
-        let pbill = this.state.patientbill;
+        let pbill = this.props.patientbill;
         let viewdrugbill;
         let viewinjectionbill;
-
-        if(pbill.drugbill!==null){
-            console.log("full drug array")
-            viewdrugbill = (
+        console.log(pbill);
+        if(pbill !==null && pbill!=="") {
+            if (pbill.drugbill !== null) {
+                console.log("full drug array")
+                viewdrugbill = (
                     <table className="table table-bordered table-hover">
                         <tbody>
                         <tr>
@@ -44,41 +46,42 @@ class PatientBill extends Component{
                         </tr>
                         </tbody>
                     </table>
-            )
-        }else{
-            console.log("empty drug array");
-            viewdrugbill = "";
-        }
+                )
+            } else {
+                console.log("empty drug array");
+                viewdrugbill = "";
+            }
 
-        if(pbill.injectionbill!==null){
-            console.log("full injection array")
-            viewinjectionbill = (
-                <table className="table table-bordered table-hover">
-                    <tbody>
-                    <tr>
-                        <th>Injection Name</th>
-                        <th>Qty</th>
-                        <th align="right">SubTotal (Rs.)</th>
-                    </tr>
-                    {pbill.injectionbill.map((inj, i) => {
-                        return (
-                            <tr>
-                                <td>{inj.name}</td>
-                                <td>{inj.qty}</td>
-                                <td align="right">{inj.subprice}</td>
-                            </tr>
-                        );
-                    })}
-                    <tr>
-                        <th>SubTotal</th>
-                        <td colSpan="2" align="right">{pbill.totinjbill}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            )
-        }else{
-            console.log("empty drug array");
-            viewinjectionbill = "";
+            if (pbill.injectionbill !== null) {
+                console.log("full injection array")
+                viewinjectionbill = (
+                    <table className="table table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <th>Injection Name</th>
+                            <th>Qty</th>
+                            <th align="right">SubTotal (Rs.)</th>
+                        </tr>
+                        {pbill.injectionbill.map((inj, i) => {
+                            return (
+                                <tr>
+                                    <td>{inj.name}</td>
+                                    <td>{inj.qty}</td>
+                                    <td align="right">{inj.subprice}</td>
+                                </tr>
+                            );
+                        })}
+                        <tr>
+                            <th>SubTotal</th>
+                            <td colSpan="2" align="right">{pbill.totinjbill}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                )
+            } else {
+                console.log("empty drug array");
+                viewinjectionbill = "";
+            }
         }
 
         return(
