@@ -9,38 +9,43 @@ class Payment extends Component{
     constructor(props){
         super(props);
         this.state = {
-            search_p_id : null,
+            search_p_id : 0,
             patientdata : null,
-            diagnosedata: null
+            billdata: null
         }
     }
 
+
     setSearchPID(e){
-        this.setState({search_p_id:e.target.value});
+            this.setState({search_p_id: e.target.value});
     }
 
     search(e){
-        console.log(e.target.id);
-
-        Axios.get("http://localhost:8000/getpatient/"+this.state.search_p_id).then(function (data) {
-            console.log(data.data);
-            this.setState({patientdata:data.data});
-        }.bind(this)).then(Axios.get("http://localhost:9001/getdiag").then(function (data) {
-            console.log(data.data);
-            this.setState({diagnosedata:data.data});
-        }.bind(this)));
+            console.log(e.target.id);
+            console.log("***********************************"+this.state.search_p_id);
+            Axios.get("http://localhost:8000/registration/getpatient/"+this.state.search_p_id).then(function (data) {
+                console.log(data.data);
+                this.setState({patientdata : data.data});
+            }.bind(this)).then(Axios.get("http://localhost:9001/calcbill/"+this.state.search_p_id).then(function (data) {
+                console.log(data.data);
+                this.setState({billdata : data.data});
+            }.bind(this)));
     }
 
 
     render(){
+
         let pdetails;
         let pbill;
+        let alertmsg;
         if(this.state.patientdata !== null){
+            console.log("this is inside if detail"+this.state.patientdata);
+            console.log("this is inside if bill"+this.state.billdata);
             pdetails = (
-                <PatientDetails />
+                <PatientDetails patientdata={this.state.patientdata}/>
             );
             pbill = (
-                <PatientBill />
+                <PatientBill patientbill={this.state.billdata}/>
             );
         }
         else{
@@ -55,7 +60,6 @@ class Payment extends Component{
 
         return(
             <div>
-
                 <div className="card">
                     <div className="card-header bg-info text-white">Discharge Patient</div>
                     <div className="card-body">
