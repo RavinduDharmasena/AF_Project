@@ -1,6 +1,4 @@
 var UserProfile = (function() {
-    //var full_name = "";
-
     var getName = function() {
         return localStorage.getItem('name');
     };
@@ -30,10 +28,10 @@ var UserProfile = (function() {
 
     return {
         getName: getName,
-        getUsername: getName,
+        getUsername: getUsername,
         getDate: getDate,
         setName: setName,
-        setUsername: setName,
+        setUsername: setUsername,
         setDate: setDate,
     }
 
