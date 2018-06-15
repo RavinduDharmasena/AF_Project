@@ -1,5 +1,8 @@
+'use strict'
+
 const Mongoose = require('../schema/schema');
 const PaymentSchema = Mongoose.model('Payment');
+const PatientSchema = Mongoose.model('Registration');
 
 var paymentController = function () {
 
@@ -20,6 +23,15 @@ var paymentController = function () {
             }).catch(function (reason) {
                 reject({status:500,message:reason});
 
+            })
+        })
+    },
+    this.updateStatus = function (id,body) {
+        return new Promise(function (resolve, reject) {
+            PatientSchema.update({_id: id},body).then(function (value) {
+                resolve({status:200,message:"Status updated successfully"});
+            }).catch(function (reason) {
+                reject({status:500, message: reason});
             })
         })
     }
