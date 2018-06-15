@@ -38,6 +38,7 @@ class Payment extends Component{
                         this.setState({patientdata: null});
                         alert("Patient Already Discharged or Not Found");
                         this.state.searchbox.value = "";
+                        this.state.search_p_id=null;
                     } else {
                         this.setState({patientdata: data.data});
                     }
