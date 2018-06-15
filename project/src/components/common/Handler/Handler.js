@@ -10,6 +10,7 @@ import Diagosis from "../../diagnosis/Diagosis";
 import Registration from "../../registration/Registration";
 
 import "./UserHandler.css";
+import RegistrationController from "../../registration/RegistrationController";
 
 class UserHandler extends Component{
     constructor(props){
@@ -40,10 +41,12 @@ class UserHandler extends Component{
 
     setRun(value){
         this.setState({run:value});
+        UserProfile.setRun(value);
         console.log(this.state.run);
     }
 
     componentWillMount(){
+        this.setRun(UserProfile.getRun());
         if(UserProfile.getName() === ""){
             this.setLogged(false);
         }
@@ -53,7 +56,6 @@ class UserHandler extends Component{
     }
 
     render(){
-        console.log("Error : " + this.state.error);
         if(!this.state.logged){
             let ErrorBox;
             if(this.state.error !== ""){
@@ -64,10 +66,9 @@ class UserHandler extends Component{
             else{
                 ErrorBox = "";
             }
-
             return(
                 <div>
-                    <NavigationBar setRun={this.setRun}/>
+                    <NavigationBar setRun={this.setRun} logged={this.state.logged}/>
                     <div className="inline-block col-sm-5">
                         <br/>
                         <LogForm setLogged={this.setLogged} setError={this.setError} setUserDetails={this.setUserDetails}/>
@@ -125,7 +126,7 @@ class UserHandler extends Component{
                 return(
                     <div>
                         <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
-                        <Registration/>
+                        <RegistrationController/>
                         <Footer/>
                     </div>
                 );

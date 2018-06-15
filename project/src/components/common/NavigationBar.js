@@ -24,15 +24,19 @@ class NavigationBar extends Component{
         UserProfile.setName("");
         console.log("Log out called");
         this.props.setLogged(false);
-        this.setRun("user");
+        UserProfile.setRun("user");
     }
 
     setRun(value){
-        this.props.setError("");
-        if(UserProfile.getName() !== ""){
+        if(this.state.logged){
+            this.props.setError("");
+        }
+        if(UserProfile.getRun() !== ""){
+            console.log("run nav : " + UserProfile.getRun());
             this.props.setRun(value);
         }
         else{
+            console.log("run nav : " + UserProfile.getRun());
             this.props.setRun("user");
         }
     }
