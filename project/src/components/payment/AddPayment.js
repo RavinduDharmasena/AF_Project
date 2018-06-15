@@ -54,7 +54,8 @@ class AddPayment extends Component{
                     cvc : null
                 }
                 var regdata = {
-                    status : "discharge"
+                    status : "discharge",
+                    discharged_date : this.state.today
                 }
                 function updatePayment() {
                     return Axios.post('http://localhost:8000/payment/addPayment',payobj);
@@ -103,7 +104,8 @@ class AddPayment extends Component{
                 cvc : this.state.cvc
             }
             var regdata = {
-                status : "discharge"
+                status : "discharge",
+                discharged_date : this.state.today
             }
             function updatePayment() {
                 return Axios.post('http://localhost:8000/payment/addPayment',payobj);
