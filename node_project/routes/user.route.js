@@ -1,4 +1,4 @@
-const Controller = require('../userController/userController');
+const Controller = require('../Controller/userController');
 const Express = require('express');
 const Router = Express.Router();
 
@@ -18,12 +18,20 @@ Router.get('/:username/:password',function (req,res) {
     })
 });
 
+Router.get('/:id',function (req,res) {
+    Controller.getUserLogin(req.params.id).then(function (response) {
+        res.status(response.status).send(response.data);
+    }).catch(function (reason) {
+        res.status(reason.status).send(reason.message);
+    })
+});
+
 Router.put('/:id',function (req,res) {
-   Controller.updateUser(req.params.id,req.body).then(function (response) {
-       res.status(response.status).send(response.message);
-   }).catch(function (reason) {
-       res.status(reason.status).send(reason.message);
-   })
+    Controller.updateUser(req.params.id,req.body).then(function (response) {
+        res.status(response.status).send(response.message);
+    }).catch(function (reason) {
+        res.status(reason.status).send(reason.message);
+    })
 });
 
 module.exports = Router;

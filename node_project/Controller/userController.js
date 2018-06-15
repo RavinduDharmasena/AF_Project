@@ -36,42 +36,42 @@ var userController = function(){
             });
         })
     },
-    this.getUserbyUsernameAndPassword = function (username,password) {
-        return new Promise(function (resolve,reject) {
-           UserSchema.find({username:username,password:password}).exec().then(function (value) {
-               resolve({status:200,data:value});
-           }).catch(function (reason) {
-               reject({status:404,message:"No data available"});
-           })
-        });
-    },
+        this.getUserbyUsernameAndPassword = function (username,password) {
+            return new Promise(function (resolve,reject) {
+                UserSchema.find({username:username,password:password}).exec().then(function (value) {
+                    resolve({status:200,data:value});
+                }).catch(function (reason) {
+                    reject({status:404,message:"No data available"});
+                })
+            });
+        },
 
-    this.updateUser = function (id,object) {
-        return new Promise(function (resolve,reject) {
-            const User = {
-                _id:object._id,
-                username:object.username,
-                password:object.password,
-                name:object.name,
-                lastLogin:Date.now()
-            }
-            UserSchema.update({_id:id},User).then(function (value) {
-                resolve({status:200,message:"Object Updated Successfully"});
-            }).catch(function (reason) {
-                reject({status:404,message:reason});
-            })
-        });
-    },
+        this.updateUser = function (id,object) {
+            return new Promise(function (resolve,reject) {
+                const Login = {
+                    _id:object._id,
+                    //username:object.username,
+                    //password:object.password,
+                    //name:object.name,
+                    lastLogin:Date.now()//object.lastLogin
+                }
+                LoginSchema.update({_id:id},Login).then(function (value) {
+                    resolve({status:200,message:"Object Updated Successfully"});
+                }).catch(function (reason) {
+                    reject({status:404,message:reason});
+                })
+            });
+        },
 
-    this.getUserLogin = function (id) {
-        return new Promise(function (resolve,reject) {
-            UserSchema.find({_id:id}).exec().then(function (value) {
-                resolve({status:200,data:value});
-            }).catch(function (reason) {
-                reject({status:404,message:"No data available"});
-            })
-        });
-    }
+        this.getUserLogin = function (id) {
+            return new Promise(function (resolve,reject) {
+                LoginSchema.find({_id:id}).exec().then(function (value) {
+                    resolve({status:200,data:value});
+                }).catch(function (reason) {
+                    reject({status:404,message:"No data available"});
+                })
+            });
+        }
 }
 
 module.exports = new userController();

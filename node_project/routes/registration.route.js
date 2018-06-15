@@ -52,4 +52,12 @@ Router.get('/getPatients/:_id',function (req,res) {
     })
 });
 
+Router.get('/getAdmittedPatients',function (req,res) {
+    Controller.getAdmittedPatient().then(function (response) {
+        res.status(response.status).send(response.data);
+    }).catch(function (reason) {
+        res.status(reason.status).send(reason.message);
+    })
+});
+
 module.exports = Router;
