@@ -81,7 +81,7 @@ class Payment extends Component{
 
         if(this.state.showpayment){
             viewpayment = (
-                <AddPayment bill={this.state.billdata} patientdata={this.state.patientdata} resetWindow={this.resetPaymentWindow.bind(this)}/>
+                <AddPayment bill={this.state.billdata} patientdata={this.state.patientdata}/>
             );
         }
         else{
