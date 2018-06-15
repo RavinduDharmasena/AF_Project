@@ -1,9 +1,13 @@
 package com.creativelabs.payment.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,16 +64,6 @@ public class PaymentServiceImpl implements PaymentService{
 			System.out.println("***************patient found");
 			Bill bill = new Bill();
 			bill.setBillid(UUID.randomUUID().toString());
-			System.out.println(d.getDiagnoseid());
-			System.out.println(d.getPatientid());
-			System.out.println(d.getComplaints());
-			System.out.println(d.getAllergies());
-			System.out.println(d.getPhyexams());
-			
-			System.out.println(r.getFname());
-			System.out.println(r.getLname());
-			System.out.println(r.getStatus());
-			System.out.println(r.getAdmitted_date());
 			
 			List<Injectionbill> injbillList = new ArrayList<Injectionbill>();
 			List<Drugbill> drugbillList = new ArrayList<Drugbill>();
@@ -77,10 +71,7 @@ public class PaymentServiceImpl implements PaymentService{
 			if(!d.getTreatments().getInjection().isEmpty()) {
 				
 				for(DiagInjection i : d.getTreatments().getInjection()) {
-					System.out.println(i.getInjectid());
-					System.out.println(i.getAmt());
 					Injection injection = injectrepo.findOneByInjectid(i.getInjectid());
-					System.out.println("this is found injection "+injection.getInjectid());
 					totinjectionbill += injection.getInjectprice()*i.getAmt();
 					
 					Injectionbill injbill = new Injectionbill();
@@ -93,15 +84,10 @@ public class PaymentServiceImpl implements PaymentService{
 				}
 				bill.setInjectionbill(injbillList);
 			}
-			else {
-				System.out.println("injection array is empty");
-			}
 				
 			if(!d.getPresdrugs().isEmpty()) {
 				
 				for(DiagDrug dd : d.getPresdrugs()) {
-					System.out.println(dd.getDrugid());
-					System.out.println(dd.getQty());
 					Drug drug = drugrepo.findOneByDrugid(dd.getDrugid());
 					totdrugbill +=drug.getDrugprice()*dd.getQty();
 					
@@ -115,13 +101,24 @@ public class PaymentServiceImpl implements PaymentService{
 				}
 				bill.setDrugbill(drugbillList);
 			}
-			else {
-				//drugbillList= {};
-			}
 
-			bill.setBoardingdays(3);
-			bill.setBoardingbill(3*300);
-			boardingbill=3*300;
+			
+			
+			Date admdate = r.getAdmitted_date();
+			Date today = new Date();
+
+			try {
+
+				DateTime dt1 = new DateTime(admdate);
+				DateTime dt2 = new DateTime(today);
+				int ndates = Days.daysBetween(dt1, dt2).getDays()+1;
+				bill.setBoardingdays(ndates);
+				bill.setBoardingbill(ndates*300);
+				boardingbill=ndates*300;
+
+			 } catch (Exception e) {
+				e.printStackTrace();
+			 }
 			
 			bill.setPhyexams(d.getPhyexams());
 			
@@ -141,10 +138,6 @@ public class PaymentServiceImpl implements PaymentService{
 			
 			treatmentbill = totinjectionbill+sewingbill;
 			totbill = treatmentbill+totdrugbill+boardingbill+phyexmbill;
-			System.out.println("Injection bill : "+totinjectionbill);
-			System.out.println("Drug bill : "+totdrugbill);
-			System.out.println("Treatment bill : "+treatmentbill);
-			System.out.println("Total bill : "+totbill);
 			
 			bill.setTotdrugbill(totdrugbill);
 			bill.setTotbill(totbill);
@@ -157,52 +150,6 @@ public class PaymentServiceImpl implements PaymentService{
 			return null;
 		}
 		
-	}
-
-	@Override
-	public Diagnosis getdiag() {
-
-		Diagnosis d1 = new Diagnosis();
-		
-		d1.setDiagnoseid("diag0001");
-		d1.setPatientid("p00001");
-		d1.setComplaints("headache");
-		d1.setAllergies("no allergies");
-		d1.setPhyexams("xrays");
-		
-		DiagInjection dinj1 = new DiagInjection();
-		dinj1.setInjectid("inj00001");
-		dinj1.setAmt(2);
-		
-		DiagInjection dinj2 = new DiagInjection();
-		dinj2.setInjectid("inj00002");
-		dinj2.setAmt(1);
-		
-		List<DiagInjection> injList = new ArrayList<DiagInjection>();
-		injList.add(dinj1);
-		injList.add(dinj2);
-		
-		Treatment tr = new Treatment();
-		tr.setInjection(injList);
-		tr.setSewing(true);
-		
-		d1.setTreatments(tr);
-		
-		DiagDrug ddrug1 = new DiagDrug();
-		ddrug1.setDrugid("ddr0001");
-		ddrug1.setQty(5);
-		
-		DiagDrug ddrug2 = new DiagDrug();
-		ddrug2.setDrugid("ddr0002");
-		ddrug2.setQty(2);
-		
-		List<DiagDrug> ddlist = new ArrayList<DiagDrug>();
-		ddlist.add(ddrug1);
-		ddlist.add(ddrug2);
-		
-		d1.setPresdrugs(ddlist);
-		
-		return d1;
 	}
 
 	@Override
