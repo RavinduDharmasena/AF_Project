@@ -54,7 +54,6 @@ class AddPayment extends Component{
                     cvc : null
                 }
                 var regdata = {
-                    _id : this.pops.patientdata._id,
                     status : "discharge"
                 }
                 function updatePayment() {
@@ -62,15 +61,14 @@ class AddPayment extends Component{
                 }
 
                 function updateRegistration(pdata) {
-                    return Axios.put('http://localhost:8000/registration/fullRegistration/'+pdata._id,regdata);
+                    return Axios.put('http://localhost:8000/payment/updatestatus/'+pdata._id,regdata);
                 }
 
                 Axios.all([updatePayment(), updateRegistration(this.props.patientdata)])
                     .then(Axios.spread(function (acct, perms) {
-                        alert("Successfull");
+                        alert("Patient Discharged Successfully!");
                     }));
             }
-
         }
 
     }
@@ -112,15 +110,16 @@ class AddPayment extends Component{
             }
 
             function updateRegistration(pdata) {
-                return Axios.put('http://localhost:8000/registration/fullRegistration/'+pdata._id,regdata);
+                return Axios.put('http://localhost:8000/payment/updatestatus/'+pdata._id,regdata);
             }
 
             Axios.all([updatePayment(), updateRegistration(this.props.patientdata)])
                 .then(Axios.spread(function (acct, perms) {
-                    alert("Successfull");
+                    alert("Patient Discharged Successfully!");
                 }));
         }
         else{
+            alert("Invalid Payment Details");
             console.log("false");
         }
 
