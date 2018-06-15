@@ -54,6 +54,7 @@ class QuickRegistration extends Component{
                         <div className="text-right mt-4">
                             <input className="btn btn-primary" type="button" value="View Unregistered Patients" onClick={this.setRun.bind(this)}/>
                         </div><br/>
+                        <form onSubmit={this.addPatient}>
                         <div className=" col-sm-5 ">
                                 <label className="grey-text"> Id</label>
                                 <input type="text" id="defaultFormRegisterIdEx" placeholder={idAuto} value={idAuto} className="form-control w-25" readOnly /><br/>
@@ -65,9 +66,10 @@ class QuickRegistration extends Component{
                                 <input type="number" id="defaultFormRegisterAgeEx" className="form-control w-100"/><br/>
 
                                 <div className="text-center mt-4">
-                                    <button type="submit" className="btn btn-success" onClick={this.addPatient} >Register</button>
+                                    <button type="submit" className="btn btn-success" >Register</button>
                                 </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             );
