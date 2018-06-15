@@ -1,20 +1,48 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
 import Footer from "../common/Footer";
 
 class FullRegistrationForm extends Component{
 
     constructor(props){
         super(props);
+        this.state = {
+            patient : [],
+            error : null
+        }
+    }
+
+    setRun(value){
+        this.props.setRun("Registration");
+    }
+
+    componentDidMount() {
+        var id=this.props.patientId;
+console.log(id)
+        fetch("http://localhost:8000/registration/getPatients/"+id)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    this.setState({
+                        patient: result
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        error
+                    });
+                }
+            )
     }
 
     render(){
+        const {patient} = this.state;
         return(
             <div>
-                <h1>Full Patient Registration</h1>
+                <div className= "card-header bg-info text-white">Full Patient Registration</div>
 
                 <div className="text-right mt-4">
-                    <input className="btn btn-primary" type="button" value="Cancel" />
+                    <input className="btn btn-primary" type="button" value="Cancel" onClick={this.setRun.bind(this)} />
                 </div><br/>
 
                 <div className=" col-sm-5 ">
@@ -23,13 +51,13 @@ class FullRegistrationForm extends Component{
                         <input type="text" id="defaultFormRegisterIdEx" value={this.props.patientId} className="form-control w-25" readOnly /><br/>
 
                         <label className="grey-text">Patient first name</label>
-                        <input type="text" id="defaultFormRegisterFirstNameEx" className="form-control w-100"/><br/>
+                        <input type="text" id="defaultFormRegisterFirstNameEx" value={patient.fname} className="form-control w-100"/><br/>
 
                         <label className="grey-text">Patient Last name</label>
                         <input type="text" id="defaultFormRegisterLastNameEx" className="form-control w-100"/><br/>
 
                         <label className="grey-text">Patient Age</label>
-                        <input type="text" id="defaultFormRegisterAgeEx" className="form-control w-100"/><br/>
+                        <input type="number" id="defaultFormRegisterAgeEx" value={patient.age} className="form-control w-100"/><br/>
 
                         <label className="grey-text">Gender</label>
                         <div className="form-goup">
@@ -44,13 +72,13 @@ class FullRegistrationForm extends Component{
                         <input type="text" id="defaultFormRegisterCustNameEx" className="form-control w-100"/><br/>
 
                         <label className="grey-text">Custodian Contact</label>
-                        <input type="text" id="defaultFormRegisterCustContactEx" className="form-control w-100"/><br/>
+                        <input type="number" id="defaultFormRegisterCustContactEx" className="form-control w-100"/><br/>
 
                         <label className="grey-text">Patient NIC</label>
                         <input type="text" id="defaultFormRegisterNicEx" className="form-control w-100"/><br/>
 
                         <label className="grey-text">Ward</label>
-                        <input type="text" id="defaultFormRegisterWardEx" className="form-control w-100"/><br/>
+                        <input type="number" id="defaultFormRegisterWardEx" className="form-control w-100"/><br/>
 
                         <label className="grey-text">Priority Level</label>
                         <div className="form-goup">
@@ -62,7 +90,7 @@ class FullRegistrationForm extends Component{
                         </div><br/>
 
                         <div className="text-center mt-4">
-                            <button type="submit" className="btn btn-success" onClick={addPatient}>Register</button>
+                            <button type="submit" className="btn btn-success" onClick={updatePatient}>Register</button>
 
                         </div>
                 </div><br/><br/><br/>
@@ -76,7 +104,7 @@ class FullRegistrationForm extends Component{
 
 }
 
-function addPatient() {
+function updatePatient() {
     var id = document.getElementById("defaultFormRegisterIdEx").value;
     var fnm = document.getElementById("defaultFormRegisterFirstNameEx").value;
     var age = document.getElementById("defaultFormRegisterAgeEx").value;
@@ -93,7 +121,6 @@ function addPatient() {
 
 
     var obj= {
-        _id : id,
         fname : fnm,
         lname : lnm,
         age : age,
@@ -108,19 +135,28 @@ function addPatient() {
 
 
     };
-    console.log(obj);
+    if(fnm==="" || age==="" || custName==="" || custCont==="" || nic==="" ||wrd===""){
+        alert("Please fill the form...!");
+    }else if(custCont.length>10 || custCont.length<9){
+        alert("Invalid Number...!")
+    }else if(nic.length!==10){
+        alert("Invalid NIC...!")
+    }
+    else{
+        fetch('http://localhost:8000/registration/fullRegistration/'+id, {
+            method : 'PUT',
+            headers : {
+                'Accept': 'application/json, text/plain',
+                'Content-Type': 'application/json'
+            },
+            body : JSON.stringify({obj})
+        }).then(function () {
+            alert("Patient Registration Successfull!");
 
-    fetch('http://localhost:8000/addPatient/:{id}', {
-        method : 'POST',
-        headers : {
-            'Accept': 'application/json, text/plain',
-            'Content-Type': 'application/json'
-        },
-        body : JSON.stringify({obj})
-    }).then(function () {
-        alert("Patient Added for the Registration!");
+        })
+    }
 
-    })
+
 }
 
 export default FullRegistrationForm;

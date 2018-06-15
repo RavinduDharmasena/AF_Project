@@ -7,7 +7,6 @@ class Registration extends Component{
         super(props);
         this.state = {
             error: null,
-            isLoaded: false,
             patients: [],
             test : 0,
             button : null
@@ -15,14 +14,13 @@ class Registration extends Component{
     }
 
     setTest(e){
-        console.log(e.target.id);
         this.props.setPatientId(e.target.id);
         this.props.setRun("FullRegistration");
     }
 
     componentDidMount() {
         console.log(this.props);
-        fetch("http://localhost:8000/getUnregisteredPatients")
+        fetch("http://localhost:8000/registration/getUnregisteredPatients")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -30,14 +28,12 @@ class Registration extends Component{
 //                    console.log(result);
 //                    console.log("XXXXXX");
                     this.setState({
-                        isLoaded: true,
                         patients: result
                     });
 
                 },
                 (error) => {
                     this.setState({
-                        isLoaded: true,
                         error
                     });
                 }
@@ -50,11 +46,11 @@ class Registration extends Component{
 
     render(){
 
-        const { error, isLoaded, patients } = this.state;
+        const { patients } = this.state;
 
         return(
             <div>
-                <h1>Unregistered Patients</h1>
+                <div className= "card-header bg-info text-white">Unregistered Patients</div>
                 <div className="text-right mt-4">
                     <input type="button" className="btn btn-primary" value="Registering Patient" onClick={this.setRun.bind(this)}/>
                 </div><br/>
@@ -78,7 +74,7 @@ class Registration extends Component{
                                 ))}
                         </tbody>
                     </table>
-                </div>
+                </div><br/><br/>
             </div>
         );
     }
