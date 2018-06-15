@@ -130,7 +130,6 @@ class Payment extends Component{
                         </div>
                     </div>
                 </div>
-
                 {viewpayment}
                 <br/>
                 <br/>

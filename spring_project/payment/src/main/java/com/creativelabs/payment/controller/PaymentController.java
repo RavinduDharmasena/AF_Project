@@ -26,11 +26,6 @@ public class PaymentController {
 		return payservice.calcTotBill(pid);
 	}
 	
-	@RequestMapping(value="/getdiag",method=RequestMethod.GET)
-	public Diagnosis getdiag() {
-		return payservice.getdiag();
-	}
-	
 	@RequestMapping(value="/adddiag",method=RequestMethod.POST)
 	public Diagnosis adddiag(@RequestBody Diagnosis d) {
 		return payservice.addDiagnosis(d);
