@@ -18,6 +18,14 @@ class Payment extends Component{
         }
     }
 
+    setBillData(){
+        this.setState({billdata:null});
+    }
+
+    setPatientData(){
+        this.setState({patientdata:null});
+    }
+
     setShowPayment(){
         this.setState({showpayment:!this.state.showpayment});
     }
@@ -27,6 +35,7 @@ class Payment extends Component{
             this.setState({searchbox: e.target});
             console.log("****this is inside setsearchpid"+this.state.search_p_id)
     }
+
 
     search(e){
             console.log("***********************************"+this.state.search_p_id);
@@ -82,7 +91,7 @@ class Payment extends Component{
 
         if(this.state.showpayment){
             viewpayment = (
-                <AddPayment bill={this.state.billdata} patientdata={this.state.patientdata}/>
+                <AddPayment bill={this.state.billdata} patientdata={this.state.patientdata} searchboxref={this.state.searchbox} setshowpayment={this.setShowPayment.bind(this)} setbilldata={this.setBillData.bind(this)} setpatientdata={this.setPatientData.bind(this)}/>
             );
         }
         else{
@@ -100,7 +109,7 @@ class Payment extends Component{
                                 <label>Find Patient</label>
                                 <div>
                                     <div className="w-50 inline-block" >
-                                        <input id="patientsearch" onChange={this.setSearchPID.bind(this)} type="text" placeholder="Enter Paitent ID Here" className=" form-control"/>
+                                        <input id="patientsearch" onChange={this.setSearchPID.bind(this)} type="text" placeholder="Enter Patient ID Here" className=" form-control"/>
                                     </div>
                                     <div className="inline-block col-sm-3" >
                                         <input id="patientsearchbtn" type="button" onClick={this.search.bind(this)} value="Search" className="btn btn-success"/>

@@ -23,6 +23,10 @@ class AddPayment extends Component{
         }
     }
 
+    componentWillMount(){
+        console.log(this.props);
+    }
+
     setPayMethod(e){
         console.log(e.target.value);
         this.setState({paymethod:e.target.value});
@@ -43,7 +47,7 @@ class AddPayment extends Component{
                 alert("Insufficient Payment!");
             }
             else{
-                this.setState({balance:this.state.payedamount-this.props.bill.totbill});
+                this.setState({balance:this.state.cashinputref.value-this.props.bill.totbill});
                 console.log("Your balance is : "+this.state.balance);
                 var payobj = {
                     billid : this.props.bill.billid,
@@ -68,7 +72,10 @@ class AddPayment extends Component{
                 Axios.all([updatePayment(), updateRegistration(this.props.patientdata)])
                     .then(Axios.spread(function (acct, perms) {
                         alert("Patient Discharged Successfully!");
-                    }));
+                        this.props.setbilldata();
+                        this.props.setpatientdata();
+                        this.props.setshowpayment();
+                    }.bind(this)));
             }
         }
 
@@ -149,7 +156,6 @@ class AddPayment extends Component{
     render(){
         let viewPayMethod;
         if(this.state.paymethod==="Cash"){
-            console.log(this.props.bill.totbill);
             viewPayMethod = (
                 <div>
                     <br/>
