@@ -122,7 +122,6 @@ class AddPayment extends Component{
             alert("Invalid Payment Details");
             console.log("false");
         }
-
     }
 
     setCardType(e){

@@ -11,8 +11,29 @@ class PatientBill extends Component{
         let pbill = this.props.patientbill;
         let viewdrugbill;
         let viewinjectionbill;
+        let printbillid;
+        let printphyexambill;
+        let printsewingbill;
+        let printboardingbill;
+        let printtotbill;
+
         console.log(pbill);
         if(pbill !==null && pbill!=="") {
+            printbillid = (
+                <td>{pbill.billid}</td>
+            )
+            printphyexambill = (
+                <td align="right">{pbill.phyexambill}</td>
+            )
+            printsewingbill = (
+                <td align="right">{pbill.sewingbill}</td>
+            )
+            printboardingbill = (
+                <td align="right">{pbill.boardingbill}</td>
+            )
+            printtotbill = (
+                <td align="right">{pbill.totbill}</td>
+            )
             if (pbill.drugbill !== null) {
                 console.log("full drug array")
                 viewdrugbill = (
@@ -82,7 +103,7 @@ class PatientBill extends Component{
                     <tbody>
                     <tr>
                         <th>Bill ID</th>
-                        <td>{pbill.billid}</td>
+                        {printbillid}
                     </tr>
                     </tbody>
                 </table>
@@ -92,15 +113,15 @@ class PatientBill extends Component{
                     <tbody>
                         <tr>
                             <th>Physical Exam Fee</th>
-                            <td align="right">{pbill.phyexambill}</td>
+                            {printphyexambill}
                         </tr>
                         <tr>
                             <th>Sewing Fee</th>
-                            <td align="right">{pbill.sewingbill}</td>
+                            {printsewingbill}
                         </tr>
                         <tr>
                             <th>Boarding Fee</th>
-                            <td align="right">{pbill.boardingbill}</td>
+                            {printboardingbill}
                         </tr>
                     </tbody>
                 </table>
@@ -108,7 +129,7 @@ class PatientBill extends Component{
                     <tbody>
                     <tr>
                         <th>Total Bill</th>
-                        <td align="right">{pbill.totbill}</td>
+                        {printtotbill}
                     </tr>
                     </tbody>
                 </table>
