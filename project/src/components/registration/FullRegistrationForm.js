@@ -9,15 +9,17 @@ class FullRegistrationForm extends Component{
             patient : [],
             error : null
         }
+
+        this.updatePatient = this.updatePatient.bind(this);
     }
 
-    setRun(value){
+    setRun(){
         this.props.setRun("Registration");
     }
 
     componentDidMount() {
         var id=this.props.patientId;
-console.log(id)
+
         fetch("http://localhost:8000/registration/getPatients/"+id)
             .then(res => res.json())
             .then(
@@ -90,7 +92,7 @@ console.log(id)
                         </div><br/>
 
                         <div className="text-center mt-4">
-                            <button type="submit" className="btn btn-success" onClick={updatePatient}>Register</button>
+                            <button type="submit" className="btn btn-success" onClick={this.updatePatient} >Register</button>
 
                         </div>
                 </div><br/><br/><br/>
@@ -101,62 +103,61 @@ console.log(id)
         );
     }
 
+    updatePatient() {
+        var id = document.getElementById("defaultFormRegisterIdEx").value;
+        var fnm = document.getElementById("defaultFormRegisterFirstNameEx").value;
+        var age = document.getElementById("defaultFormRegisterAgeEx").value;
+        var reg = "true";
+        var stat = "admit";
+        var lnm = document.getElementById("defaultFormRegisterLastNameEx").value;
+        var gndr = document.getElementById("defaultFormRegisterGenderEx").value;
+        var custName = document.getElementById("defaultFormRegisterCustNameEx").value;
+        var custCont = document.getElementById("defaultFormRegisterCustContactEx").value;
+        var nic = document.getElementById("defaultFormRegisterNicEx").value;
+        var wrd = document.getElementById("defaultFormRegisterWardEx").value;
+        var prLevel = document.getElementById("defaultFormRegisterPriorityEx").value;
 
+
+
+        var obj= {
+            fname : fnm,
+            lname : lnm,
+            age : age,
+            gender : gndr,
+            custodian_name : custName,
+            custodian_contact : custCont,
+            nic : nic,
+            ward : wrd,
+            registered : reg,
+            status : stat,
+            priority_level : prLevel
+
+
+        };
+        if(fnm==="" || age==="" || custName==="" || custCont==="" || nic==="" ||wrd===""){
+            alert("Please fill the form...!");
+        }else if(custCont.length>10 || custCont.length<9){
+            alert("Invalid Number...!")
+        }else if(nic.length!==10){
+            alert("Invalid NIC...!")
+        }
+        else{
+            fetch('http://localhost:8000/registration/fullRegistration/'+id, {
+                method : 'PUT',
+                headers : {
+                    'Accept': 'application/json, text/plain',
+                    'Content-Type': 'application/json'
+                },
+                body : JSON.stringify({obj})
+            }).then(function () {
+                alert("Patient Registration Successfully..!");
+                this.setRun();
+            }.bind(this));
+        }
+
+    }
 }
 
-function updatePatient() {
-    var id = document.getElementById("defaultFormRegisterIdEx").value;
-    var fnm = document.getElementById("defaultFormRegisterFirstNameEx").value;
-    var age = document.getElementById("defaultFormRegisterAgeEx").value;
-    var reg = "true";
-    var stat = "admit";
-    var lnm = document.getElementById("defaultFormRegisterLastNameEx").value;
-    var gndr = document.getElementById("defaultFormRegisterGenderEx").value;
-    var custName = document.getElementById("defaultFormRegisterCustNameEx").value;
-    var custCont = document.getElementById("defaultFormRegisterCustContactEx").value;
-    var nic = document.getElementById("defaultFormRegisterNicEx").value;
-    var wrd = document.getElementById("defaultFormRegisterWardEx").value;
-    var prLevel = document.getElementById("defaultFormRegisterPriorityEx").value;
 
-
-
-    var obj= {
-        fname : fnm,
-        lname : lnm,
-        age : age,
-        gender : gndr,
-        custodian_name : custName,
-        custodian_contact : custCont,
-        nic : nic,
-        ward : wrd,
-        registered : reg,
-        status : stat,
-        priority_level : prLevel
-
-
-    };
-    if(fnm==="" || age==="" || custName==="" || custCont==="" || nic==="" ||wrd===""){
-        alert("Please fill the form...!");
-    }else if(custCont.length>10 || custCont.length<9){
-        alert("Invalid Number...!")
-    }else if(nic.length!==10){
-        alert("Invalid NIC...!")
-    }
-    else{
-        fetch('http://localhost:8000/registration/fullRegistration/'+id, {
-            method : 'PUT',
-            headers : {
-                'Accept': 'application/json, text/plain',
-                'Content-Type': 'application/json'
-            },
-            body : JSON.stringify({obj})
-        }).then(function () {
-            alert("Patient Registration Successfull!");
-
-        })
-    }
-
-
-}
 
 export default FullRegistrationForm;
