@@ -72,7 +72,16 @@ var registrationController = function () {
                 reject({status:404,message:"No data available"});
             })
         });
-    }
+    },
+	this.getAdmittedPatient = function () {
+		return new Promise(function (resolve,reject) {
+			patientSchema.find({status: "admit"}).exec().then(function (value) {
+				resolve({status: 200, data: value});
+			}).catch(function () {
+				reject({status:404,message:"No data available"});
+			})
+		});
+	}
 }
 
 module.exports = new registrationController();
