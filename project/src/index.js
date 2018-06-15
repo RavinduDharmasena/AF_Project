@@ -9,6 +9,11 @@ import Diagosis from "./components/diagnosis/Diagosis";
 import Registration from "./components/registration/Registration";
 import Payment from "./components/payment/Payment";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+import App from './App';
+
+
 ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={User}></Route>

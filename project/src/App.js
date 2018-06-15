@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {Link} from 'react-router';
 
+
 class App extends Component {
   render() {
     return (
@@ -17,7 +18,7 @@ class App extends Component {
                     <ul class="nav navbar-nav">
                         <li class="active"><Link to="/user">Overview</Link></li>
                         <li><a href="#">Patient Registration</a></li>
-                        <li><a href="#">Diagnosis</a></li>
+                        <li><a href="#">Diagosis</a></li>
                         <li><a href="#">Payment</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

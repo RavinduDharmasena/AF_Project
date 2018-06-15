@@ -2,34 +2,39 @@ const express = require('Express');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
 const injectSchema = new Schema({
-    injectid:String,
-    amt:Number
+    _id:String,
+    injectname:String,
+    injectprice:Number
 
 });
 
 const drugs = new Schema({
-    drugid : String,
-    qty:Number
+    _id:String,
+    drugname : String,
+    amount:Number
 });
 
+
 const diagSchema = new Schema({
-    patientid:patientid,
-    //patientid:{type: mongoose.Schema.Types.ObjectId, ref: 'patient'},
+
+    patientid:String,
     complaints:String,
     allergies:String,
     phyexams:String,
-    treatments:String
-    treatments:[{injections :{ type: mongoose.Schema.Types.ObjectId, ref: 'injections',qty:Number, Total:Number},presdrugs:{ type: mongoose.Schema.Types.ObjectId, ref: 'drugs' ,qty:Number, Total:Number}}]
+    treatments:String,
+    injectname:String,
+    injectprice:Number,
+    drugname:String,
+    amount:Number
+
 
 });
-
-
 
 mongoose.model('injections', drugs);
 mongoose.model('drugs', injectSchema);
 mongoose.model('diagnosis', diagSchema);
+
 
 mongoose.connect('mongodb://localhost:27017/pcudb' , (err)=>{
     if(err){

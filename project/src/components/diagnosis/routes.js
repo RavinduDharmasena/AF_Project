@@ -1,24 +1,31 @@
 const express = require('express');
-const functions = require('./functions');
-
 const router =express.Router();
+const functions = require('./functions');
+const mongoose =require('./db');
 
-router.post('/Diagnosis', function (req, res){
-    let Diagnosis ={
+
+
+router.post('/diagnosis', function (req, res){
+    let diagnosis ={
+
         patientid: req.body.patientid,
         complaints: req.body.complaints,
         allergies: req.body.allergies,
         phyexams: req.body.phyexams,
         treatments: req.body.treatments,
+        injectname:req.body.injectname,
+        injectprice:req.body.injectprice,
+        drugname:req.body.drugname,
+        amount:req.body.amount
 
     };
 
-    functions.addDiagnosis(Diagnosis, function (err, data) {
+    functions.addDiagnosis(diagnosis, function (err, data) {
         if(!err){
-            res.status(2000).send({"success":data});
+            res.status(200).send({"success":data});
         }
         else{
-            res.status(4000).send({"error":err});
+            res.status(400).send({"error":err});
         }
 
     })
@@ -30,7 +37,7 @@ router.get('/Diagnosis', function (req, res) {
             res.status(200).send({"success":data});
         }
         else{
-            res.status(4000).send({"error":err});
+            res.status(400).send({"error":err});
         }
 
     });
@@ -38,26 +45,33 @@ router.get('/Diagnosis', function (req, res) {
 });
 
 
-router.get('/ :patientid', function(req, res, next) {
-    var patientid = req.params.patientid;
+router.get('/Diagnosis/:patientid', function(req, res) {
 
-    functions.getDiagnosisBypatientid(patientid, function(err, result)
+
+    functions.getDiagnosisBypatientid(req.params.patientid, function(err, data)
     {
-        if(err) { next(err); }
-        res.json(result);
+        if(!err){
+            res.status(200).send({"success":data});
+        }
+        else{
+            res.status(400).send({"error":err});
+        }
     });
 });
 
-router.put('./:patientid', (req, res) =>{
-    functions.update(req.params.patientid, req.body).then(response => {
-        res.status(response.status).send(response);
-    }).catch(err =>{
-        res.Status(err.status).send(err.message);
+router.put('./Diagnosis/:patientid', function(req, res){
+    functions.updatebyPatientid(req.params.patientid, req.body , function(err, data) {
+        if (!err) {
+            res.status(200).send({"success": data});
+        }
+        else {
+            res.status(400).send({"error": err});
+        }
     })
 });
 
 
-router.delete('./patientid', (req,res)=>{
+router.delete('./Diagnosis/:patientid', (req,res)=>{
     functions.delete(req.params.patientid, req.body).then(response => {
         res.status(response.status).send(response);
     }).catch(err =>{
