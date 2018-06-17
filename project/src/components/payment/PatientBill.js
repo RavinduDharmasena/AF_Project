@@ -2,25 +2,38 @@ import React,{ Component } from 'react'
 
 class PatientBill extends Component{
 
-    /*constructor(props){
-        super(props);
 
-        this.state = {
-            patientbill : this.props.patientbill
-        }
-    }*/
-
-    componentWillMount(){
-       // this.setState({patientbill:this.props.patientbill});
+    setShowPayment(){
+        this.props.setShowPayment();
     }
-
 
     render(){
         let pbill = this.props.patientbill;
         let viewdrugbill;
         let viewinjectionbill;
+        let printbillid;
+        let printphyexambill;
+        let printsewingbill;
+        let printboardingbill;
+        let printtotbill;
+
         console.log(pbill);
         if(pbill !==null && pbill!=="") {
+            printbillid = (
+                <td>{pbill.billid}</td>
+            )
+            printphyexambill = (
+                <td align="right">{pbill.phyexambill}</td>
+            )
+            printsewingbill = (
+                <td align="right">{pbill.sewingbill}</td>
+            )
+            printboardingbill = (
+                <td align="right">{pbill.boardingbill}</td>
+            )
+            printtotbill = (
+                <td align="right">{pbill.totbill}</td>
+            )
             if (pbill.drugbill !== null) {
                 console.log("full drug array")
                 viewdrugbill = (
@@ -33,7 +46,7 @@ class PatientBill extends Component{
                         </tr>
                         {pbill.drugbill.map((drug, i) => {
                             return (
-                                <tr>
+                                <tr key={i}>
                                     <td>{drug.name}</td>
                                     <td>{drug.qty}</td>
                                     <td align="right">{drug.subprice}</td>
@@ -64,7 +77,7 @@ class PatientBill extends Component{
                         </tr>
                         {pbill.injectionbill.map((inj, i) => {
                             return (
-                                <tr>
+                                <tr key={i}>
                                     <td>{inj.name}</td>
                                     <td>{inj.qty}</td>
                                     <td align="right">{inj.subprice}</td>
@@ -90,7 +103,7 @@ class PatientBill extends Component{
                     <tbody>
                     <tr>
                         <th>Bill ID</th>
-                        <td>{pbill.billid}</td>
+                        {printbillid}
                     </tr>
                     </tbody>
                 </table>
@@ -100,15 +113,15 @@ class PatientBill extends Component{
                     <tbody>
                         <tr>
                             <th>Physical Exam Fee</th>
-                            <td align="right">{pbill.phyexambill}</td>
+                            {printphyexambill}
                         </tr>
                         <tr>
                             <th>Sewing Fee</th>
-                            <td align="right">{pbill.sewingbill}</td>
+                            {printsewingbill}
                         </tr>
                         <tr>
                             <th>Boarding Fee</th>
-                            <td align="right">{pbill.boardingbill}</td>
+                            {printboardingbill}
                         </tr>
                     </tbody>
                 </table>
@@ -116,11 +129,11 @@ class PatientBill extends Component{
                     <tbody>
                     <tr>
                         <th>Total Bill</th>
-                        <td align="right">{pbill.totbill}</td>
+                        {printtotbill}
                     </tr>
                     </tbody>
                 </table>
-                <button className="btn btn-success w-100">Pay Bill</button>
+                <button className="btn btn-success w-100" onClick={this.setShowPayment.bind(this)}>Pay Bill</button>
             </div>
         );
     }

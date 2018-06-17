@@ -13,6 +13,8 @@ import com.creativelabs.payment.model.Diagnosis;
 import com.creativelabs.payment.model.Registration;
 import com.creativelabs.payment.service.PaymentService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @CrossOrigin("http://localhost:3000")
 @RequestMapping("/")
@@ -21,21 +23,19 @@ public class PaymentController {
 	@Autowired
 	private PaymentService payservice;
 	
+	@ApiOperation(value = "Calculate Patient's Bill")
 	@RequestMapping(value="/calcbill/{pid}",method=RequestMethod.GET)
 	public Bill calculateBill(@PathVariable("pid") String pid) {
 		return payservice.calcTotBill(pid);
 	}
 	
-	@RequestMapping(value="/getdiag",method=RequestMethod.GET)
-	public Diagnosis getdiag() {
-		return payservice.getdiag();
-	}
-	
+	@ApiOperation(value = "Add New Diagnose Information")
 	@RequestMapping(value="/adddiag",method=RequestMethod.POST)
 	public Diagnosis adddiag(@RequestBody Diagnosis d) {
 		return payservice.addDiagnosis(d);
 	}
 	
+	@ApiOperation(value = "Get Patient Information")
 	@RequestMapping(value="/getpaitent/{id}",method=RequestMethod.GET)
 	public Registration getpatientbyid(@PathVariable String id) {
 		return payservice.getPatient(id);

@@ -1,3 +1,4 @@
+
 const Express = require('express');
 const Router = Express.Router();
 const Controller = require('../Controller/registrationController');
@@ -43,7 +44,7 @@ Router.put('/fullRegistration/:_id',function (req,res) {
     })
 });
 
-Router.get('/getPatient/:_id',function (req,res) {
+Router.get('/getPatients/:_id',function (req,res) {
     Controller.getPatient(req.params._id).then(function (response) {
         res.status(response.status).send(response.data);
     }).catch(function (reason) {
@@ -51,7 +52,6 @@ Router.get('/getPatient/:_id',function (req,res) {
     })
 });
 
-/////////////////////////////////////////////////////
 Router.get('/getAdmittedPatients',function (req,res) {
     Controller.getAdmittedPatient().then(function (response) {
         res.status(response.status).send(response.data);
@@ -60,12 +60,4 @@ Router.get('/getAdmittedPatients',function (req,res) {
     })
 });
 
-Router.get('/getAdmittedPatientsToday/:date',function (req,res) {
-    console.log(req.params.date);
-    Controller.getAdmittedPatientToday(req.params.date).then(function (response) {
-        res.status(response.status).send(response.data);
-    }).catch(function (reason) {
-        res.status(reason.status).send(reason.message);
-    })
-});
 module.exports = Router;
