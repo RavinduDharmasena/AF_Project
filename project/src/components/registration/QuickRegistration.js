@@ -52,25 +52,30 @@ class QuickRegistration extends Component{
 
                     <div>
                         <div className="text-right mt-4">
-                            <input className="btn btn-primary" type="button" value="View Unregistered Patients" onClick={this.setRun.bind(this)}/>
+                            <input className="btn btn-primary" type="button" value="View Quick Registered Patients" onClick={this.setRun.bind(this)}/>
                         </div><br/>
-                        <form onSubmit={this.addPatient}>
-                        <div className=" col-sm-5 ">
-                                <label className="grey-text"> Id</label>
-                                <input type="text" id="defaultFormRegisterIdEx" placeholder={idAuto} value={idAuto} className="form-control w-25" readOnly /><br/>
+                        <div className="card">
+                            <br/>
+                            <form onSubmit={this.addPatient}>
+                            <div className=" col-sm-5 ">
+                                    <label className="grey-text"> Id</label>
+                                    <input type="text" id="defaultFormRegisterIdEx" placeholder={idAuto} value={idAuto} className="form-control w-25" readOnly /><br/>
 
-                                <label className="grey-text">Patient name</label>
-                                <input type="text" id="defaultFormRegisterNameEx" className="form-control w-100"/><br/>
+                                    <label className="grey-text">Patient name</label>
+                                    <input type="text" id="defaultFormRegisterNameEx" className="form-control w-100"/><br/>
 
-                                <label className="grey-text">Patient Age</label>
-                                <input type="number" id="defaultFormRegisterAgeEx" className="form-control w-100"/><br/>
+                                    <label className="grey-text">Patient Age</label>
+                                    <input type="number" id="defaultFormRegisterAgeEx" className="form-control w-100"/>
 
-                                <div className="text-center mt-4">
-                                    <button type="submit" className="btn btn-success" >Register</button>
-                                </div>
+                                    <div className="text-center mt-4">
+                                        <button type="submit" className="btn btn-success" >Register</button>
+                                    </div>
+                                    <br/>
+                            </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
+                    <br/>
                 </div>
             );
     }

@@ -50,11 +50,10 @@ class Registration extends Component{
 
         return(
             <div>
-                <div className= "card-header bg-info text-white">Unregistered Patients</div>
+                <div className= "card-header bg-info text-white">Full Registration</div>
                 <div className="text-right mt-4">
-                    <input type="button" className="btn btn-primary" value="Registering Patient" onClick={this.setRun.bind(this)}/>
+                    <input type="button" className="btn btn-primary" value="Quick Registration" onClick={this.setRun.bind(this)}/>
                 </div><br/>
-
                 <div>
 
                     <table className="table table-dark table-hover">
