@@ -38,18 +38,18 @@ class Overview extends Component{
         let UpdatedateTime = new Date().toISOString().split("T");
         return(
             <div className="card">
-                <div className="card-header bg-default text-black">Overview</div>
+                <div className="card-header bg-info text-white">Overview</div>
                 <div className="card-body">
                     <div>
                         <div className="inline-block col-sm-6">
                             <div className="card">
-                                <div className="card-header bg-primary text-white"><p align="center">Number of doctors</p></div>
-                                <div className="card-body"><h2 align="center">10</h2></div>
+                                <div className="card-header bg-secondary text-white"><p align="center">Number of doctors</p></div>
+                                <div className="card-body"><h2 align="center">6</h2></div>
                             </div>
                         </div>
                         <div className="inline-block  col-sm-6">
                             <div className="card">
-                                <div className="card-header bg-primary text-white"><p align="center">Number of nurses</p></div>
+                                <div className="card-header bg-secondary text-white"><p align="center">Number of nurses</p></div>
                                 <div className="card-body"><h2 align="center">10</h2></div>
                             </div>
                         </div>
@@ -58,13 +58,13 @@ class Overview extends Component{
                     <div>
                         <div className="inline-block  col-sm-6">
                             <div className="card">
-                                <div className="card-header bg-primary text-white"><p align="center">Number of patient admitted today</p></div>
+                                <div className="card-header bg-secondary text-white"><p align="center">Number of patient admitted today</p></div>
                                 <div className="card-body"><h2 align="center">{this.state.admittedAmountToday}</h2></div>
                             </div>
                         </div>
                         <div className="inline-block  col-sm-6">
                             <div className="card">
-                                <div className="card-header bg-primary text-white"><p align="center">Total number of admitted patients</p></div>
+                                <div className="card-header bg-secondary text-white"><p align="center">Total number of admitted patients</p></div>
                                 <div className="card-body"><h2 align="center">{this.state.admittedAmount}</h2></div>
                             </div>
                         </div>

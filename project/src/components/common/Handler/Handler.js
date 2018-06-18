@@ -46,7 +46,11 @@ class UserHandler extends Component{
     }
 
     componentWillMount(){
-        this.setRun(UserProfile.getRun());
+        if(UserProfile.getRun() !== "undefined"){
+            this.setRun(UserProfile.getRun());
+        }
+//        this.console.log(UserProfile.getRun());
+//        this.setRun(this.state.run);
         if(UserProfile.getName() === ""){
             this.setLogged(false);
         }
@@ -56,30 +60,39 @@ class UserHandler extends Component{
     }
 
     render(){
+        /*let ErrorBox = "";
+        if(this.state.error !== ""){
+            console.log("Inside first if");
+            ErrorBox = (<div className="alert alert-danger">
+                {this.state.error}
+            </div>);
+        }
+        else{
+            console.log("Inside second if");
+            ErrorBox = "";
+        }*/
         if(!this.state.logged){
-            let ErrorBox;
+            /*let ErrorBox;
             if(this.state.error !== ""){
+                console.log("inside first if");
                 ErrorBox = (<div className="alert alert-danger">
                     {this.state.error}
                 </div>);
             }
             else{
+                console.log("inside second if");
                 ErrorBox = "";
-            }
+            }*/
             return(
                 <div>
                     <NavigationBar setRun={this.setRun} logged={this.state.logged}/>
                     <div className="inline-block col-sm-5">
                         <br/>
-                        <LogForm setLogged={this.setLogged} setError={this.setError} setUserDetails={this.setUserDetails}/>
+                        <LogForm setLogged={this.setLogged} setError={this.setError} setUserDetails={this.setUserDetails} error={this.state.error}/>
                     </div>
                     <div className="inline-block col-sm-7">
                         <br/>
                         <Overview/>
-                    </div>
-                    <div className="col-sm-5">
-                        <br/>
-                        {ErrorBox}
                     </div>
                     <Footer/>
                 </div>
@@ -125,8 +138,7 @@ class UserHandler extends Component{
             else if(this.state.run === "register"){
                 return(
                     <div>
-                        <NavigationBar setLogged={this.setLogged} setRun={this.setRun} setError={this.setError}/>
-                        <RegistrationController/>
+                        <RegistrationController setLogged={this.setLogged} setRun={this.setRun} setError={this.setError} run={this.state.run}/>
                         <Footer/>
                     </div>
                 );

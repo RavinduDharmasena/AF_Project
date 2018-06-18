@@ -47,14 +47,16 @@ class User extends Component{
                 UserProfile.setName(UserData[0].name);
             }
             else{
-                this.props.setError("Username and/or password is/are invalid");
+                if((this.state.username !== "") & (this.state.password !== "")){
+                    this.props.setError("Username and/or password is/are invalid");
+                }
                 return;
             }
             return UserData;
         }.bind(this)).then(function (object) {
             let UserObject = object;
-            console.log(UserObject);
-            console.log("object ID : " + UserObject[0]._id);
+            //console.log(UserObject);
+            //console.log("object ID : " + UserObject[0]._id);
             Axios.get('http://localhost:8000/user/' + UserObject[0]._id).then(function (data) {
                 console.log(data.data);
                 UserProfile.setDate(data.data[0].lastLogin);
@@ -70,6 +72,8 @@ class User extends Component{
                 });
                 this.props.setLogged(true);
             }.bind(this));
+        }.bind(this)).catch(function (reason) {
+            console.log("Error : " + reason);
         }.bind(this));
     }
 
@@ -84,8 +88,18 @@ class User extends Component{
     }
 
     render(){
+        let ErrorBox = "";
         console.log(this.state.error);
-
+        if(this.props.error !== ""){
+            ErrorBox = (
+                <div className="alert alert-danger">
+                    {this.props.error}
+                </div>
+            );
+        }
+        else{
+            ErrorBox = "";
+        }
         return(
             <div>
                 <div className="card">
@@ -100,6 +114,8 @@ class User extends Component{
                             <input type="password" placeholder="password" className="form-control" onChange={this.setPassword.bind(this)}/>
                         </div>
                         <input type="button" className="btn btn-success" value="Log In" onClick={this.setName.bind(this)}/>
+                        <br/><br/>
+                        {ErrorBox}
                     </div>
                 </div>
             </div>

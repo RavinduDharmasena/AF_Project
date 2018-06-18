@@ -8,16 +8,16 @@ class UserInfo extends Component{
         console.log("User Info Mounted");
         console.log(this.props);
         console.log("Username : " + UserProfile.getUsername());
-        let date = UserProfile.getDate().substring(0,10);
-        let time = UserProfile.getDate().substring(11,19);
-        console.log("Date : " + date);
-        console.log("Time : " + time);
+        // let date = UserProfile.getDate().substring(0,10);
+        // let time = UserProfile.getDate().substring(11,19);
+        // console.log("Date : " + date);
+        // console.log("Time : " + time);
     }
 
     render(){
         return(
           <div className="card">
-              <div className="card-header bg-primary text-white">User Information</div>
+              <div className="card-header bg-info text-white">User Information</div>
               <img src={require('../../../img/user-50x50.png')} className="card-img-top imgDisplay"/>
               <div className="card-footer">
                   <p>Username : {UserProfile.getUsername()}</p>
