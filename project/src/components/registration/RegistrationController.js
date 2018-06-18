@@ -3,6 +3,7 @@ import Footer from "../common/Footer"
 import FullRegistrationForm from "./FullRegistrationForm";
 import Registration from './Registration';
 import QuickRegistration from "./QuickRegistration";
+import NavigationBar from "../common/NavigationBar";
 
 class RegistrationController extends Component{
 
@@ -28,6 +29,7 @@ class RegistrationController extends Component{
         if(this.state.run === "Registration") {
             return (
                 <div>
+                    <NavigationBar setLogged={this.props.setLogged} setRun={this.props.setRun} setError={this.props.setError} setRunLocal={this.setRun} run={this.props.run}/>
                     <Registration setRun={this.setRun} setPatientId={this.setPatientId}/>
                     <Footer/>
                 </div>
@@ -36,6 +38,7 @@ class RegistrationController extends Component{
         else if(this.state.run === "FullRegistration"){
             return (
                 <div>
+                    <NavigationBar setLogged={this.props.setLogged} setRun={this.setRun} setError={this.props.setError} setRunLocal={this.setRun} run={this.props.run}/>
                     <FullRegistrationForm patientId={this.state.patientId} setRun={this.setRun}/>
                     <Footer/>
                 </div>
@@ -43,7 +46,10 @@ class RegistrationController extends Component{
         }
         else if(this.state.run === "QuickRegistration"){
             return(
-              <QuickRegistration setRun={this.setRun}/>
+                <div>
+                    <NavigationBar setLogged={this.props.setLogged} setRun={this.props.setRun} setError={this.props.setError} setRunLocal={this.setRun} run={this.props.run}/>
+                    <QuickRegistration setRun={this.setRun}/>
+                </div>
             );
         }
     }

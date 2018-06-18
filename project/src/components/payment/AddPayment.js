@@ -41,12 +41,14 @@ class AddPayment extends Component{
 
     payanddischargecash(){
         if(this.state.payedamount===null) {
-            alert("Insufficient Payment empty!");
+            alert("Insufficient Payment!");
         }else{
             if(this.props.bill.totbill>this.state.payedamount){
                 alert("Insufficient Payment!");
             }
             else{
+                console.log(this.state.cashinputref.value);
+                console.log(this.props.bill.totbill);
                 this.setState({balance:this.state.cashinputref.value-this.props.bill.totbill});
                 console.log("Your balance is : "+this.state.balance);
                 var payobj = {
@@ -125,7 +127,10 @@ class AddPayment extends Component{
             Axios.all([updatePayment(), updateRegistration(this.props.patientdata)])
                 .then(Axios.spread(function (acct, perms) {
                     alert("Patient Discharged Successfully!");
-                }));
+                    this.props.setbilldata();
+                    this.props.setpatientdata();
+                    this.props.setshowpayment();
+                }.bind(this)));
         }
         else{
             alert("Invalid Payment Details");
@@ -167,6 +172,9 @@ class AddPayment extends Component{
                     </div>
                     <div className="inline-block col-sm-3" >
                         <input id="payndischargecashbtn" type="button" onClick={this.payanddischargecash.bind(this)} value="Pay and Discharge" className="btn btn-danger"/>
+                    </div>
+                    <div className="inline-block col-sm-3" >
+                        <p>Balance : {this.state.balance}</p>
                     </div>
                 </div>
             );
